@@ -1,0 +1,272 @@
+// src/App.js - Enhanced with better routing and performance
+
+import React, { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { usePerformance } from './contexts/PerformanceContext';
+import Layout from './components/Layout/Layout';
+import LoadingSpinner from './components/Common/LoadingSpinner';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import AdminRoute from './components/Auth/AdminRoute';
+import Error404 from './pages/Error/Error404';
+import Maintenance from './pages/Error/Maintenance';
+import OfflineFallback from './components/Common/OfflineFallback';
+import './App.css';
+
+// Performance-based code splitting
+const createLazyComponent = (importFunc) => 
+  lazy(() => importFunc().then(module => ({ default: module.default })));
+
+// Lazy load pages with preloading
+const Home = createLazyComponent(() => import('./pages/Home/Home'));
+const Dashboard = createLazyComponent(() => import('./pages/Dashboard/Dashboard'));
+const Login = createLazyComponent(() => import('./pages/Auth/Login'));
+const Register = createLazyComponent(() => import('./pages/Auth/Register'));
+const ForgotPassword = createLazyComponent(() => import('./pages/Auth/ForgotPassword'));
+const ImageGeneration = createLazyComponent(() => import('./pages/ImageGeneration/ImageGeneration'));
+const ImageGallery = createLazyComponent(() => import('./pages/ImageGeneration/ImageGallery'));
+const ImageEditor = createLazyComponent(() => import('./pages/ImageGeneration/ImageEditor'));
+const VideoGeneration = createLazyComponent(() => import('./pages/VideoGeneration/VideoGeneration'));
+const VideoStudio = createLazyComponent(() => import('./pages/VideoGeneration/VideoStudio'));
+const VideoGallery = createLazyComponent(() => import('./pages/VideoGeneration/VideoGallery'));
+const AudioProcessing = createLazyComponent(() => import('./pages/AudioProcessing/AudioProcessing'));
+const AudioStudio = createLazyComponent(() => import('./pages/AudioProcessing/AudioStudio'));
+const AudioGallery = createLazyComponent(() => import('./pages/AudioProcessing/AudioGallery'));
+const IoTDashboard = createLazyComponent(() => import('./pages/IoT/IoTDashboard'));
+const IoTDevices = createLazyComponent(() => import('./pages/IoT/IoTDevices'));
+const IoTControl = createLazyComponent(() => import('./pages/IoT/IoTControl'));
+const SelfLearning = createLazyComponent(() => import('./pages/SelfLearning/SelfLearning'));
+const LearningSessions = createLazyComponent(() => import('./pages/SelfLearning/LearningSessions'));
+const KnowledgeGraph = createLazyComponent(() => import('./pages/SelfLearning/KnowledgeGraph'));
+const CodeGeneration = createLazyComponent(() => import('./pages/CodeGeneration/CodeGeneration'));
+const TextGeneration = createLazyComponent(() => import('./pages/TextGeneration/TextGeneration'));
+const Automation = createLazyComponent(() => import('./pages/Automation/Automation'));
+const Workflows = createLazyComponent(() => import('./pages/Workflows/Workflows'));
+const Analytics = createLazyComponent(() => import('./pages/Analytics/Analytics'));
+const Billing = createLazyComponent(() => import('./pages/Billing/Billing'));
+const Subscription = createLazyComponent(() => import('./pages/Subscription/Subscription'));
+const Affiliate = createLazyComponent(() => import('./pages/Affiliate/Affiliate'));
+const Profile = createLazyComponent(() => import('./pages/Profile/Profile'));
+const Settings = createLazyComponent(() => import('./pages/Settings/Settings'));
+const AdminDashboard = createLazyComponent(() => import('./pages/Admin/AdminDashboard'));
+const AdminUsers = createLazyComponent(() => import('./pages/Admin/AdminUsers'));
+const AdminModels = createLazyComponent(() => import('./pages/Admin/AdminModels'));
+const AdminAnalytics = createLazyComponent(() => import('./pages/Admin/AdminAnalytics'));
+
+function App() {
+  const { user, loading } = useAuth();
+  const { trackPageView } = usePerformance();
+  const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location, trackPageView]);
+
+  if (loading) {
+    return (
+      <div className="app-loading">
+        <LoadingSpinner size="large" />
+        <p>Loading Changex Neurix...</p>
+        <div className="loading-progress">
+          <div className="progress-bar" />
+        </div>
+      </div>
+    );
+  }
+
+  // Check for maintenance mode
+  if (process.env.REACT_APP_MAINTENANCE_MODE === 'true') {
+    return <Maintenance />;
+  }
+
+  return (
+    <div className="app">
+      <OfflineFallback />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
+          <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/pricing" element={<Layout><Subscription /></Layout>} />
+
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Layout><Dashboard /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Image Generation Routes */}
+          <Route path="/image-generation" element={
+            <ProtectedRoute>
+              <Layout><ImageGeneration /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/image-gallery" element={
+            <ProtectedRoute>
+              <Layout><ImageGallery /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/image-editor/:id?" element={
+            <ProtectedRoute>
+              <Layout><ImageEditor /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Video Generation Routes */}
+          <Route path="/video-generation" element={
+            <ProtectedRoute>
+              <Layout><VideoGeneration /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/video-studio" element={
+            <ProtectedRoute>
+              <Layout><VideoStudio /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/video-gallery" element={
+            <ProtectedRoute>
+              <Layout><VideoGallery /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Audio Processing Routes */}
+          <Route path="/audio-processing" element={
+            <ProtectedRoute>
+              <Layout><AudioProcessing /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/audio-studio" element={
+            <ProtectedRoute>
+              <Layout><AudioStudio /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/audio-gallery" element={
+            <ProtectedRoute>
+              <Layout><AudioGallery /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* IoT Routes */}
+          <Route path="/iot" element={
+            <ProtectedRoute>
+              <Layout><IoTDashboard /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/iot/devices" element={
+            <ProtectedRoute>
+              <Layout><IoTDevices /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/iot/control/:deviceId?" element={
+            <ProtectedRoute>
+              <Layout><IoTControl /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Self-Learning Routes */}
+          <Route path="/self-learning" element={
+            <ProtectedRoute>
+              <Layout><SelfLearning /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/learning-sessions" element={
+            <ProtectedRoute>
+              <Layout><LearningSessions /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/knowledge-graph" element={
+            <ProtectedRoute>
+              <Layout><KnowledgeGraph /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* AI Features Routes */}
+          <Route path="/code-generation" element={
+            <ProtectedRoute>
+              <Layout><CodeGeneration /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/text-generation" element={
+            <ProtectedRoute>
+              <Layout><TextGeneration /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/automation" element={
+            <ProtectedRoute>
+              <Layout><Automation /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/workflows" element={
+            <ProtectedRoute>
+              <Layout><Workflows /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Business Routes */}
+          <Route path="/analytics" element={
+            <ProtectedRoute>
+              <Layout><Analytics /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/billing" element={
+            <ProtectedRoute>
+              <Layout><Billing /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/subscription" element={
+            <ProtectedRoute>
+              <Layout><Subscription /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/affiliate" element={
+            <ProtectedRoute>
+              <Layout><Affiliate /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* User Routes */}
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Layout><Profile /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <Layout><Settings /></Layout>
+            </ProtectedRoute>
+          } />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={
+            <AdminRoute>
+              <Layout><AdminDashboard /></Layout>
+            </AdminRoute>
+          } />
+          <Route path="/admin/users" element={
+            <AdminRoute>
+              <Layout><AdminUsers /></Layout>
+            </AdminRoute>
+          } />
+          <Route path="/admin/models" element={
+            <AdminRoute>
+              <Layout><AdminModels /></Layout>
+            </AdminRoute>
+          } />
+          <Route path="/admin/analytics" element={
+            <AdminRoute>
+              <Layout><AdminAnalytics /></Layout>
+            </AdminRoute>
+          } />
+
+          {/* 404 Route */}
+          <Route path="*" element={<Layout><Error404 /></Layout>} />
+        </Routes>
+      </Suspense>
+    </div>
+  );
+}
+
+export default App;
