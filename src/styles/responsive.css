@@ -1,0 +1,564 @@
+// src/styles/responsive.css - Advanced responsive styles
+
+/* Responsive Design System */
+
+/* Container Breakpoints */
+.container-responsive {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile First Design */
+@media (max-width: 640px) {
+  /* Typography */
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  /* Layout */
+  .mobile-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mobile-center {
+    text-align: center;
+  }
+  
+  .mobile-full-width {
+    width: 100%;
+  }
+  
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-visible {
+    display: block !important;
+  }
+  
+  /* Buttons */
+  .mobile-btn-block {
+    width: 100%;
+    display: block;
+  }
+  
+  /* Forms */
+  .mobile-form-stack .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Cards */
+  .mobile-card {
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+  
+  /* Navigation */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    z-index: var(--z-fixed);
+    padding: 0.5rem;
+  }
+  
+  .mobile-nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  /* Modals */
+  .mobile-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 90vh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+  
+  /* Touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Safe area insets for iOS */
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-inset-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .tablet-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .tablet-hidden {
+    display: none !important;
+  }
+  
+  .tablet-visible {
+    display: block !important;
+  }
+  
+  /* Sidebar */
+  .tablet-sidebar-collapsible {
+    width: 60px;
+  }
+  
+  .tablet-sidebar-collapsible:hover {
+    width: 250px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .container-responsive {
+    max-width: 1400px;
+  }
+  
+  .desktop-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .desktop-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  
+  .desktop-sidebar-fixed {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+  }
+}
+
+/* Orientation Specific */
+@media (orientation: landscape) and (max-height: 500px) {
+  .landscape-hide {
+    display: none !important;
+  }
+  
+  .landscape-compact {
+    padding: 0.5rem;
+  }
+}
+
+@media (orientation: portrait) {
+  .portrait-full-height {
+    height: 100vh;
+  }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  .print-break-avoid {
+    break-inside: avoid;
+  }
+  
+  .print-page-break {
+    page-break-before: always;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .fade-in,
+  .slide-in {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-500: #0000ff;
+    --primary-600: #0000cc;
+    --text-primary: #000000;
+    --bg-primary: #ffffff;
+    --border-color: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --text-primary: #ffffff;
+    --bg-primary: #000000;
+    --border-color: #ffffff;
+  }
+  
+  .high-contrast-border {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Touch Device Detection */
+@media (hover: none) and (pointer: coarse) {
+  .touch-device {
+    /* Styles specific to touch devices */
+  }
+  
+  .hover-effect {
+    /* Disable hover effects on touch devices */
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  /* Larger touch targets */
+  button, 
+  a,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Mouse Device Detection */
+@media (hover: hover) and (pointer: fine) {
+  .mouse-device {
+    /* Styles specific to mouse devices */
+  }
+  
+  /* Hover effects only for mouse devices */
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Foldable Devices */
+@media (screen-spanning: single-fold-vertical) {
+  .foldable-device {
+    /* Styles for foldable devices */
+  }
+}
+
+/* Responsive Typography */
+.responsive-text {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  line-height: clamp(1.5, 2vw, 2);
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: clamp(1.2, 3vw, 1.4);
+}
+
+/* Fluid Grid System */
+.fluid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1rem;
+}
+
+/* Aspect Ratio Containers */
+.aspect-ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+/* Responsive Images */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.responsive-bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 640px) {
+  .responsive-bg-image {
+    background-size: contain;
+  }
+}
+
+/* Scroll Snap */
+.scroll-snap-container {
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+/* Sticky Headers */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--bg-primary);
+  backdrop-filter: blur(10px);
+}
+
+/* Loading States */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Offline Indicator */
+.offline-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--danger-500);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  animation: slideInUp 0.3s ease-out;
+  z-index: var(--z-toast);
+}
+
+/* Connection Quality */
+.connection-quality-excellent {
+  color: var(--success-500);
+}
+
+.connection-quality-good {
+  color: var(--warning-500);
+}
+
+.connection-quality-poor {
+  color: var(--danger-500);
+}
+
+/* Responsive Tables */
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.responsive-table table {
+  min-width: 600px;
+}
+
+/* Modal Responsiveness */
+@media (max-width: 768px) {
+  .responsive-modal {
+    width: 95vw;
+    max-width: 95vw;
+    margin: 1rem;
+  }
+}
+
+/* Split View */
+@media (min-width: 1024px) {
+  .split-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Card Grid Responsiveness */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Responsiveness */
+.responsive-form {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Navigation Responsiveness */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+  
+  .nav-mobile {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-mobile {
+    display: none;
+  }
+  
+  .nav-desktop {
+    display: flex;
+  }
+}
+
+/* Custom Scrollbar */
+@media (min-width: 1024px) {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-500) var(--bg-secondary);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-500);
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-600);
+  }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-data: reduce) {
+  .data-saving {
+    /* Reduce background images */
+    background-image: none !important;
+    
+    /* Reduce animations */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    
+    /* Use system fonts */
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+  
+  .lazy-load {
+    /* Load images only when visible */
+    loading: lazy;
+  }
+}
+
+/* Dark Mode Media Query */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Apply dark theme if no theme is set */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #475569;
+  }
+}
+
+/* Print Optimization */
+@media print {
+  * {
+    color: black !important;
+    background: white !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+}
