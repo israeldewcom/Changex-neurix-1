@@ -1,0 +1,87 @@
+{
+  "name": "Changex Neurix",
+  "short_name": "Changex Neurix",
+  "description": "AI-Powered Content Generation Platform",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0ea5e9",
+  "background_color": "#0f172a",
+  "categories": ["productivity", "utilities", "graphics"],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Changex Neurix Dashboard"
+    },
+    {
+      "src": "/assets/images/screenshot-2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile Image Generation"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any monochrome"
+    },
+    {
+      "src": "/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Generate Image",
+      "short_name": "Image",
+      "description": "Create AI-generated images",
+      "url": "/image-generation",
+      "icons": [{ "src": "/assets/icons/image-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Create Video",
+      "short_name": "Video",
+      "description": "Generate AI videos",
+      "url": "/video-generation",
+      "icons": [{ "src": "/assets/icons/video-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Process Audio",
+      "short_name": "Audio",
+      "description": "AI audio processing",
+      "url": "/audio-processing",
+      "icons": [{ "src": "/assets/icons/audio-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "protocol_handlers": [
+    {
+      "protocol": "web+changex",
+      "url": "/auth/callback?protocol=%s"
+    }
+  ]
+}
