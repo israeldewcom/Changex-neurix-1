@@ -1,0 +1,69 @@
+# Changex Neurix Robots.txt
+# Generated: 2024-01-01
+# Contact: support@changexneurix.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Crawl delays (requests per second)
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: https://changexneurix.com/sitemap.xml
+
+# Host
+Host: https://changexneurix.com
+
+# Common crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 3
+
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+# Bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+# Development and staging
+User-agent: *
+Disallow: /staging/
+Disallow: /dev/
+Disallow: /test/
