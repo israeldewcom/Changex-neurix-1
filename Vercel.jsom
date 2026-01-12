@@ -4,5 +4,5 @@
   "devCommand": "npm start",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "create-react-app",
-  "nodeVersion": "18.x"
+  "nodeVersion": "20.x"
 }
